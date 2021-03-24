@@ -1,0 +1,33 @@
+.container {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+form.image-load_form {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 650px;
+    max-height: 800px;
+    background-color: #ffcc00;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    mr: 10px;
+}
+
+.photo{
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.photo-container {
+    max-width: 500px;
+    max-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
