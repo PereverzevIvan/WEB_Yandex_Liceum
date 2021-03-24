@@ -3,7 +3,7 @@ from flask import Flask, url_for, render_template, request, redirect
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/load_photo', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
         return render_template('base.html')
@@ -13,7 +13,7 @@ def index():
             file_name = f'img/{file.filename}'
             file.save(f'static/{file_name}')
             return render_template('base.html', file_name=file_name)
-        return redirect('/')
+        return redirect('/load_photo')
 
 
 if __name__ == '__main__':
