@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container">
-    <h1>Registration</h1>
+    <h1>Регистрация</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <span>
@@ -86,8 +86,10 @@
                 </div>
             {% endfor %}
         </span>
-        <span>{{ form.submit(type="submit", class="btn btn-primary") }}</span>
-        <div>{{ message }}</div>
+        <span>{{ form.submit(type="submit", class="btn btn-dark") }}</span>
+        <br><br>
+        <div class="alert alert-danger">{{ message }}</div>
     </form>
 </div>
+<br>
 {% endblock %}
