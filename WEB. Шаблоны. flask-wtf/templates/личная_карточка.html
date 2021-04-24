@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block double_defends %}
+<div class="container">
+    <h1 align="center">{{user.name}} {{user.surname}}</h1>
+    <img src="{{ url_for('static', filename=user.url) }}" style="width: 400px; height: 300px; margin-left: 450px">
+    <p align="center">
+        {% for spec in specialize %}
+        {% if not loop.last %}
+        {{spec}},
+        {% else %}
+        {{spec}}
+        {% endif %}
+        {% endfor %}
+    </p>
+</div>
+{% endblock %}
