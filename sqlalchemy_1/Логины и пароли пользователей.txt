@@ -1,11 +1,7 @@
 User 1:
-    login: "Megamall_Zero@gmail.com"
-    password: "megaman 1"
+    email: a@gmail.com
+    password: megaman
 
 User 2:
-    login: "Megaman_Axl@gmail.com"
-    password: "megaman 1"
-
-User 3:
-    login: "Megaman_Ariel@gmail.com"
-    password: "megaman 1"
+    email: b@gmail.com
+    password: megaman
