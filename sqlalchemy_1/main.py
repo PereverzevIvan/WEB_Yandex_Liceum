@@ -149,6 +149,11 @@ def register():
     return render_template('register_form.html', title='Регистрация', form=form)
 
 
+@app.route('/departments')
+def show_deps():
+    pass
+
+
 def main():
     db_session.global_init('db/mars_one.db')
     app.run()

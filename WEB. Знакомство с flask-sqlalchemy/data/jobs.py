@@ -15,4 +15,5 @@ class Jobs(SqlAlchemyBase):
     end_start = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
     is_finished = sqlalchemy.Column(sqlalchemy.Boolean, default=True)
     team_leader = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
+
     user = orm.relation('User')
