@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField, IntegerField, DateField, BooleanField
+from wtforms import SubmitField, StringField, IntegerField, BooleanField, SelectField
 from wtforms.validators import DataRequired
 
 
@@ -9,4 +9,5 @@ class AddJobForm(FlaskForm):
     collaborators = StringField('Участники', validators=[DataRequired()])
     is_finished = BooleanField('Закончена ли')
     team_leader = IntegerField('Лидер команды', validators=[DataRequired()])
+    categories = SelectField('Категория')
     submit = SubmitField('Submit')

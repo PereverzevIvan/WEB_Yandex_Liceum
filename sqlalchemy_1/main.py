@@ -3,6 +3,7 @@ from werkzeug.utils import redirect
 from data import db_session
 from data.users import User
 from data.jobs import Jobs
+from data.category import Category
 from data.departments import Department
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from data.login_form import LoginForm
@@ -62,7 +63,12 @@ def get_jobs():
 
 @app.route('/add_job', methods=['GET', 'POST'])
 def add_job():
+    db_sess = db_session.create_session()
     form = AddJobForm()
+    categories = {'': 0}
+    for i in db_sess.query(Category).all():
+        categories[i.name] = i.id
+    form.categories.choices = [i for i in categories.keys()]
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         job = Jobs()
@@ -71,6 +77,10 @@ def add_job():
         job.collaborators = form.collaborators.data
         job.team_leader = form.team_leader.data
         job.is_finished = form.is_finished.data
+        category = categories[form.categories.data]
+        if category:
+            category = db_sess.query(Category).filter(Category.id == category).first()
+            job.categories.append(category)
         db_sess.add(job)
         db_sess.commit()
         return redirect("/get_jobs")
@@ -80,7 +90,12 @@ def add_job():
 @app.route('/edit_job/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_news(id):
+    db_sess = db_session.create_session()
     form = AddJobForm()
+    categories = {'': 0}
+    for i in db_sess.query(Category).all():
+        categories[i.name] = i.id
+    form.categories.choices = [i for i in categories.keys()]
     if request.method == "GET":
         db_sess = db_session.create_session()
         jobs = db_sess.query(Jobs).filter(
@@ -103,6 +118,10 @@ def edit_news(id):
             job.collaborators = form.collaborators.data
             job.team_leader = form.team_leader.data
             job.is_finished = form.is_finished.data
+            category = categories[form.categories.data]
+            if category:
+                category = db_sess.query(Category).filter(Category.id == category).first()
+                job.categories.append(category)
             db_sess.commit()
             return redirect('/get_jobs')
         else:
@@ -231,7 +250,7 @@ def edit_dep(id):
 
 
 def main():
-    db_session.global_init('db/mars_one.db')
+    db_session.global_init('db/mars_one_1.db')
     app.run()
 
 
