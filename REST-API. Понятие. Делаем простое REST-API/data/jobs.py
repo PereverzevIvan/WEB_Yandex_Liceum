@@ -17,7 +17,11 @@ class Jobs(SqlAlchemyBase, SerializerMixin, UserMixin):
     end_start = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
     is_finished = sqlalchemy.Column(sqlalchemy.Boolean, default=True)
     team_leader = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
+
     user = orm.relation('User')
+    categories = orm.relation("Category",
+                              secondary="association",
+                              backref="jobs")
 
     def __repr__(self):
         return f'<User> {self.id} {self.name} {self.email}'

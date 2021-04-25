@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container" style="width: 1000px">
+    <h2 style="width: 300px; margin-left: auto; margin-right: auto">Список работ</h2>
+    <button type="button" class="btn btn-dark"><a href="http://127.0.0.1:5000/add_job"
+                                                  style="color: white; text-decoration: none">Добавить работу</a>
+    </button>
+    <button type="button" class="btn btn-dark">
+        <a href="http://127.0.0.1:5000/get_departments" style="color: white; text-decoration: none">
+            To departments
+        </a>
+    </button>
+    <br>
+    {% for job in jobs %}
+    <table class="table">
+        <h2 style="color: black">Работа # {{job.id}}</h2>
+        <thead>
+        <tr class="table-dark">
+            <th scope="col">Цель работы</th>
+            <th scope="col">Лидер</th>
+            <th scope="col">Продолжительность</th>
+            <th scope="col">Участники</th>
+            <th scope="col">Категория работы</th>
+            <th scope="col">Закончена ли</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-secondary">
+            <th scope="row">{{job.job}}</th>
+            <td align="center">{{ users[job.team_leader - 1] }}</td>
+            <td align="center">{{job.work_size}} hours</td>
+            <td>{{job.collaborators}}</td>
+            <td align="center">
+                {% for cat in job.categories %}
+                {% if loop.last %}
+                {{ cat }}
+                {% else %}
+                {{ cat }},
+                {% endif %}
+                {% endfor %}
+            </td>
+            {% if job.is_finished %}
+            <td class="table-success" align="center">
+                Finished
+            </td>
+            {% else %}
+            <td class="table-danger" align="center">
+                Is not finished
+            </td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
+    {% if (current_user.is_authenticated and current_user == job.user) or current_user.id == 1 %}
+    <div>
+        <a href="/edit_job/{{ job.id }}" class="btn btn-warning">
+            Изменить
+        </a>
+        <a href="/jobs_delete/{{ job.id }}" class="btn btn-danger">
+            Удалить
+        </a>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<br>
+{% endblock %}
