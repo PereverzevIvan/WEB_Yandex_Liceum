@@ -36,7 +36,6 @@ toponym_longitude, toponym_lattitude = toponym_coodrinates.split(" ")
 
 delta_1, delta_2 = get_spn(toponym)
 
-
 # Собираем параметры для запроса к StaticMapsAPI:
 map_params = {
     "ll": ",".join([toponym_longitude, toponym_lattitude]),
